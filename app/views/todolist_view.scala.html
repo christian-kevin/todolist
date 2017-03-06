@@ -1,0 +1,35 @@
+@import todolist._
+@(errors: List[String],todolists: List[ToDoList])
+@main("My Own To Do List"){
+  <div class="container">
+  <h2>My To Do List</h2>
+    <div class="col-sm-9 form-container-holder">
+      <div class="row">
+        @if(errors != null && errors.size > 0) {
+          <ul class="alert alert-danger col-xs-12">
+          @for(error <- errors) {
+            <li>@error</li>
+          }
+          </ul>
+        }
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for(todolist <- todolists){
+        <tr>
+          <td>@Html(todolist.getTitle())</td>
+          <td>@Html(todolist.getDescription())</td>
+          <td><a href="@routes.ToDoListController.updateToDobyId(todolist.getId())">Edit</a><td>
+          <td><a href="@routes.ToDoListController.deleteToDo(todolist.getId())">Delete</a><td>
+        </tr>
+      }
+    </tbody>
+  </table>
+    <a class="btn btn-primary" href="@routes.ToDoListController.index()">New To Do</a>
+  </div>
+}

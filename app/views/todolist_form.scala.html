@@ -1,0 +1,26 @@
+@import todolist._
+@import helper._
+@main("To Do List Form"){
+  <div class="container">
+  <h1> Insert Your Own To Do List</h1>
+  <form id="todoform" class="login-form" method="POST" >
+    <div class="row">
+      To Do : <br>
+      <div class="col-sm-12 field">
+        <input id="title" name="title" type="text" class="form-control" placeholder="Title"/>
+        <br>
+      </div>
+        Description <br>
+      <div class="col-xs-12 field">
+        <input id="description" name="description" type="text" class="form-control" placeholder="Description"/>
+        <br>
+      </div>
+      <div class="col-xs-12 field">
+        <input type="submit" class="submit-button btn btn-default btn-md" value="Submit"/>
+      </div>
+    </div>
+  </form>
+  </div>
+  }
+
+

@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 import request.newToDoRequest;
 import com.google.common.base.Preconditions;
+import exceptions.ErrorListException;
+import play.api.mvc.Flash;
 
 
 /**
@@ -16,11 +18,18 @@ public enum ToDoListManager {
         return ToDoListDAO.INSTANCE.getToDoLists();
     }
 
-    public ToDoList createNewToDo(newToDoRequest request){
+    public ToDoList createNewToDo(newToDoRequest request) throws ErrorListException{
         Preconditions.checkNotNull(request);
         ToDoList newToDo = new ToDoList(request.getTitle(),
-                                     request.getDescription());
-        newToDo = ToDoListDAO.INSTANCE.persistToDoList(newToDo);
+                request.getDescription());
+        try {
+            if (newToDo.getTitle().equals("") || newToDo.getTitle().equals(null))
+                throw new ErrorListException("Kolom title harus terisi!");
+            newToDo = ToDoListDAO.INSTANCE.persistToDoList(newToDo);
+        }
+        catch (ErrorListException e){
+            throw e;
+        }
         return newToDo;
     }
 
@@ -32,10 +41,19 @@ public enum ToDoListManager {
         ToDoListDAO.INSTANCE.deleteTodoListbyId(id);
     }
 
-    public void updateToDobyId(long id, newToDoRequest request){
+    public void updateToDobyId(long id, newToDoRequest request) throws ErrorListException{
         Preconditions.checkNotNull(request);
         ToDoList newToDo = new ToDoList(request.getTitle(),
-                                        request.getDescription());
-        ToDoListDAO.INSTANCE.updateTodoListbyId(id,newToDo);
+                request.getDescription());
+        try {
+            if (newToDo.getTitle().equals("") || newToDo.getTitle().equals(null))
+                throw new ErrorListException("Kolom title harus terisi!");
+            ToDoListDAO.INSTANCE.updateTodoListbyId(id,newToDo);
+        }
+        catch (ErrorListException e)
+        {
+            throw e;
+        }
+
     }
 }

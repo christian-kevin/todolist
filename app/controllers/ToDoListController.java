@@ -38,7 +38,7 @@ public class ToDoListController extends Controller {
         catch (ErrorListException e){
             return ok(todolist_view.render(e.getErrors(),todolists));
         }
-        return ok(todolist_view.render(null,todolists));
+        return redirect(routes.ToDoListController.showToDoList());
     }
 
     public Result index(){
@@ -65,6 +65,6 @@ public class ToDoListController extends Controller {
         catch (ErrorListException e){
             return ok(todolist_view.render(e.getErrors(),todolists));
         }
-        return ok(todolist_view.render(null,todolists));
+        return redirect(routes.ToDoListController.showToDoList());
     }
 }

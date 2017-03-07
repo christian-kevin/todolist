@@ -12,7 +12,7 @@
           }
           </ul>
         }
-  <table class="table table-striped">
+  <table id="#" class="table table-striped">
     <thead>
       <tr>
         <th>Title</th>
@@ -22,13 +22,11 @@
     <tbody>
       @for(todolist <- todolists){
         <tr>
-        <form method="POST" action="@routes.ToDoListController.deleteToDo(todolist.getId())">
           <td>@todolist.getTitle()</td>
           <td>@todolist.getDescription()</td>
           <td><a href="@routes.ToDoListController.updateToDobyId(todolist.getId())">Edit</a><td>
-          <td><input type="submit" class="btn btn-default" value="Delete">
+          <td><button onclick="del('@routes.ToDoListController.deleteToDo(todolist.getId())');">Delete</button>
         </td>
-      </form>
         </tr>
       }
     </tbody>
@@ -37,4 +35,15 @@
       </div>
     </div>
   </div>
+  <script>
+          function del(urltoDelete){
+              $.ajax({
+                  url: urltoDelete,
+                  type:'POST',
+                  success: function (results) {
+                    location.reload();
+                  }
+              });
+          }
+  </script>
 }

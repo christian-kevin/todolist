@@ -22,14 +22,19 @@
     <tbody>
       @for(todolist <- todolists){
         <tr>
-          <td>@Html(todolist.getTitle())</td>
-          <td>@Html(todolist.getDescription())</td>
+        <form method="POST" action="@routes.ToDoListController.deleteToDo(todolist.getId())">
+          <td>@todolist.getTitle()</td>
+          <td>@todolist.getDescription()</td>
           <td><a href="@routes.ToDoListController.updateToDobyId(todolist.getId())">Edit</a><td>
-          <td><a href="@routes.ToDoListController.deleteToDo(todolist.getId())">Delete</a><td>
+          <td><input type="submit" class="btn btn-default" value="Delete">
+        </td>
+      </form>
         </tr>
       }
     </tbody>
   </table>
     <a class="btn btn-primary" href="@routes.ToDoListController.index()">New To Do</a>
+      </div>
+    </div>
   </div>
 }

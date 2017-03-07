@@ -6,6 +6,7 @@ import request.newToDoRequest;
 import com.google.common.base.Preconditions;
 import exceptions.ErrorListException;
 import play.api.mvc.Flash;
+import org.apache.commons.lang3.StringUtils;
 
 
 /**
@@ -22,14 +23,9 @@ public enum ToDoListManager {
         Preconditions.checkNotNull(request);
         ToDoList newToDo = new ToDoList(request.getTitle(),
                 request.getDescription());
-        try {
-            if (newToDo.getTitle().equals("") || newToDo.getTitle().equals(null))
+            if (StringUtils.isBlank(newToDo.getTitle()))
                 throw new ErrorListException("Kolom title harus terisi!");
             newToDo = ToDoListDAO.INSTANCE.persistToDoList(newToDo);
-        }
-        catch (ErrorListException e){
-            throw e;
-        }
         return newToDo;
     }
 
@@ -45,15 +41,8 @@ public enum ToDoListManager {
         Preconditions.checkNotNull(request);
         ToDoList newToDo = new ToDoList(request.getTitle(),
                 request.getDescription());
-        try {
-            if (newToDo.getTitle().equals("") || newToDo.getTitle().equals(null))
+            if (StringUtils.isBlank(newToDo.getTitle()))
                 throw new ErrorListException("Kolom title harus terisi!");
             ToDoListDAO.INSTANCE.updateTodoListbyId(id,newToDo);
-        }
-        catch (ErrorListException e)
-        {
-            throw e;
-        }
-
     }
 }

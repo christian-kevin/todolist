@@ -6,7 +6,7 @@
 GET     /                           controllers.ToDoListController.showToDoList
 GET     /form                       controllers.ToDoListController.index
 POST    /form                       controllers.ToDoListController.createNewToDo
-GET     /:id/delete                 controllers.ToDoListController.deleteToDo(id: Long)
+POST    /:id/delete                 controllers.ToDoListController.deleteToDo(id: Long)
 GET     /form/:id                   controllers.ToDoListController.redirectEdit(id:  Long)
 POST    /form/:id                   controllers.ToDoListController.updateToDobyId(id:  Long)
 

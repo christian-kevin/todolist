@@ -47,7 +47,7 @@ public class ToDoListController extends Controller {
 
     public Result deleteToDo(Long id){
         ToDoListManager.INSTANCE.deleteToDoListbyId(id);
-        return redirect(routes.ToDoListController.showToDoList());
+        return ok("To Do has been deleted");
     }
 
     public Result redirectEdit(Long id){
